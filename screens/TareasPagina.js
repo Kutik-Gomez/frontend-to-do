@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../styles/colors"; // Importa los colores globales
 import { FontAwesome } from '@expo/vector-icons'; // Asegúrate de tener instalada la librería
 
-export default function TareasPagina() {
+export default function TareasPagina({ navigation }) { // Añade navigation como prop
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -12,7 +12,10 @@ export default function TareasPagina() {
       <View style={styles.content}>
         {/* Aquí puedes agregar el contenido de la página */}
       </View>
-      <TouchableOpacity style={styles.fab} onPress={() => {/* Acción al presionar el botón */}}>
+      <TouchableOpacity 
+        style={styles.fab} 
+        onPress={() => navigation.navigate("FormularioTarea")} // Navega a FormularioTarea
+      >
         <FontAwesome name="plus" size={24} color="white" />
       </TouchableOpacity>
     </View>

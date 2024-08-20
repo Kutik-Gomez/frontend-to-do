@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack"; // Importa createStackNavigator
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBook, faUsers, faClock } from '@fortawesome/free-solid-svg-icons';
@@ -9,25 +9,46 @@ import { faBook, faUsers, faClock } from '@fortawesome/free-solid-svg-icons';
 import TareasPagina from "./screens/TareasPagina";
 import ColaboradoresPagina from "./screens/ColaboradoresPagina";
 import ProximosPagina from "./screens/ProximosPagina";
-import FormularioTarea from "./screens/FormularioTarea"; // Importa la pantalla FormularioTarea
+import FormularioTarea from "./screens/FormularioTarea"; 
+import FormularioCompartido from "./screens/FormularioCompartido"; 
 
-// Crear el Stack Navigator
-const Stack = createStackNavigator();
+// Crear el Stack Navigator para Tareas
+const TareasStack = createStackNavigator();
 
-function TareasStack() {
+function TareasStackNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen 
+    <TareasStack.Navigator>
+      <TareasStack.Screen 
         name="TareasPagina" 
         component={TareasPagina} 
-        options={{ headerShown: false }} // Oculta el header por defecto
+        options={{ headerShown: false }} 
       />
-      <Stack.Screen 
+      <TareasStack.Screen 
         name="FormularioTarea" 
         component={FormularioTarea} 
-        options={{ headerShown: false }} // Oculta el header por defecto
+        options={{ headerShown: false }} 
       />
-    </Stack.Navigator>
+    </TareasStack.Navigator>
+  );
+}
+
+// Crear el Stack Navigator para Colaboradores
+const ColaboradoresStack = createStackNavigator();
+
+function ColaboradoresStackNavigator() {
+  return (
+    <ColaboradoresStack.Navigator>
+      <ColaboradoresStack.Screen 
+        name="ColaboradoresPagina" 
+        component={ColaboradoresPagina} 
+        options={{ headerShown: false }} 
+      />
+      <ColaboradoresStack.Screen 
+        name="FormularioCompartido" 
+        component={FormularioCompartido} 
+        options={{ headerShown: false }} 
+      />
+    </ColaboradoresStack.Navigator>
   );
 }
 
@@ -39,16 +60,16 @@ function MyTab() {
     <Tab.Navigator
       initialRouteName="Tareas"
       screenOptions={{
-        tabBarActiveTintColor: "#4d409e", // Color para la etiqueta y el ícono cuando está activo
-        tabBarInactiveTintColor: "#796fb6", // Color para la etiqueta y el ícono cuando no está activo
+        tabBarActiveTintColor: "#4d409e", 
+        tabBarInactiveTintColor: "#796fb6", 
         tabBarLabelStyle: {
-          fontSize: 15, // Aumenta el tamaño de la etiqueta
+          fontSize: 15, 
         },
       }}
     >
       <Tab.Screen
         name="Tareas"
-        component={TareasStack} // Usa TareasStack en lugar de TareasPagina
+        component={TareasStackNavigator} 
         options={{
           tabBarLabel: "Tareas",
           tabBarIcon: ({ color, size }) => (
@@ -59,7 +80,7 @@ function MyTab() {
       />
       <Tab.Screen
         name="Compartidos"
-        component={ColaboradoresPagina}
+        component={ColaboradoresStackNavigator} 
         options={{
           tabBarLabel: "Compartidos",
           tabBarIcon: ({ color, size }) => (
