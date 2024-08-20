@@ -21,8 +21,8 @@ function MyTab() {
         tabBarInactiveTintColor: "#796fb6", // Color para la etiqueta y el ícono cuando no está activo
         tabBarLabelStyle: {
           fontSize: 15, // Aumenta el tamaño de la etiqueta
-          fontWeight: 'bold', // Hace la etiqueta en negrita
-          fontWeight: 'Source',
+          /*fontWeight: 'bold', // Hace la etiqueta en negrita
+          fontFamily: 'Source',*/
         },
       }}
     >
