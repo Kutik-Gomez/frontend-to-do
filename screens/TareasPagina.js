@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import colors from "../styles/colors"; // Importa los colores globales
+import { FontAwesome } from '@expo/vector-icons'; // Asegúrate de tener instalada la librería
 
 export default function TareasPagina() {
   return (
@@ -11,31 +12,49 @@ export default function TareasPagina() {
       <View style={styles.content}>
         {/* Aquí puedes agregar el contenido de la página */}
       </View>
+      <TouchableOpacity style={styles.fab} onPress={() => {/* Acción al presionar el botón */}}>
+        <FontAwesome name="plus" size={24} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, // Usa todo el espacio disponible
-    backgroundColor: '#e8e8e8', // Color gris claro para el fondo del contenido
+    flex: 1,
+    backgroundColor: colors.containerBackground, // Usa el color global para el fondo del contenedor
   },
   header: {
-    backgroundColor: '#fff', // Fondo blanco para el encabezado
+    backgroundColor: colors.headerBackground, // Usa el color global para el fondo del encabezado
     paddingHorizontal: 16,
-    paddingVertical: 20, // Ajusta la altura del encabezado
+    paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#dcdcdc', // Líneas sutiles entre el encabezado y el contenido
+    borderBottomColor: colors.headerBorderBottom, // Usa el color global para la línea inferior del encabezado
   },
   title: {
-    fontSize: 28, // Tamaño del título más grande
-    fontWeight: 'bold', // Texto en negrita
-    color: 'black', // Color del texto negro
-    
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: colors.titleColor, // Usa el color global para el texto del título
   },
   content: {
     flex: 1,
-    backgroundColor: '#f0f0f0', // Fondo del contenido, más oscuro que el encabezado
+    backgroundColor: colors.contentBackground, // Usa el color global para el fondo del contenido
     padding: 16,
+  },
+  fab: {
+    position: 'absolute',
+    width: 56,
+    height: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 16,
+    bottom: 16,
+    backgroundColor: '#007bff', // Color azul para el botón flotante, puedes usar un color de tu paleta
+    borderRadius: 28,
+    elevation: 5, // Sombra en Android
+    shadowColor: '#000', // Sombra en iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
 });
