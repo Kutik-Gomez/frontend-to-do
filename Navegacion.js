@@ -3,32 +3,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faBook, faUsers, faClock } from '@fortawesome/free-solid-svg-icons';
-import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
 import TareasPagina from "./screens/TareasPagina";
 import ColaboradoresPagina from "./screens/ColaboradoresPagina";
 import ProximosPagina from "./screens/ProximosPagina";
-
-const TareaStackNavigator = createStackNavigator();
-
-// Crear el Stack Navigator para Tareas
-function MyStack() {
-  return (
-    <TareaStackNavigator.Navigator initialRouteName="TareaScreen">
-      <TareaStackNavigator.Screen 
-        name="TareaScreen" 
-        component={TareasPagina}
-        options={{ headerShown: false }} 
-      />
-      <TareaStackNavigator.Screen 
-        name="CompartirScreen" 
-        component={ColaboradoresPagina}
-        options={{ headerShown: false }} 
-      />
-    </TareaStackNavigator.Navigator>
-  );
-}
 
 // Crear el Tab Navigator
 const Tab = createBottomTabNavigator();
@@ -41,14 +20,15 @@ function MyTab() {
         tabBarActiveTintColor: "#4d409e", // Color para la etiqueta y el ícono cuando está activo
         tabBarInactiveTintColor: "#796fb6", // Color para la etiqueta y el ícono cuando no está activo
         tabBarLabelStyle: {
-          fontSize: 14, // Aumenta el tamaño de la etiqueta
+          fontSize: 15, // Aumenta el tamaño de la etiqueta
           fontWeight: 'bold', // Hace la etiqueta en negrita
+          fontWeight: 'Source',
         },
       }}
     >
       <Tab.Screen
         name="Tareas"
-        component={MyStack}
+        component={TareasPagina}
         options={{
           tabBarLabel: "Tareas",
           tabBarIcon: ({ color, size }) => (
@@ -59,7 +39,7 @@ function MyTab() {
       />
       <Tab.Screen
         name="Compartidos"
-        component={ColaboradoresPagina} // Puedes usar una pantalla diferente para "Compartidos" o usar MyStack
+        component={ColaboradoresPagina}
         options={{
           tabBarLabel: "Compartidos",
           tabBarIcon: ({ color, size }) => (
