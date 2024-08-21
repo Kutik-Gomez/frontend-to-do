@@ -5,6 +5,7 @@ import styles from "../styles/FormularioTareaEstilos"; // Asegúrate de que la r
 import { FontAwesome } from '@expo/vector-icons';
 import { crearTarea } from "../services/tareasService"; // Importar la función para crear tareas
 import { getToken } from "../services/authService"; // Importar la función para obtener el token
+import colors from "../styles/colors";
 
 export default function FormularioTarea({ navigation }) {
   const [titulo, setTitulo] = useState("");
@@ -41,7 +42,7 @@ export default function FormularioTarea({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <FontAwesome name="arrow-left" size={24} color={styles.titleColor} />
+          <FontAwesome name="arrow-left" size={30} color={"#ffef6a"} />
         </TouchableOpacity>
         <Text style={styles.title}>Formulario Tarea</Text>
       </View>
@@ -51,25 +52,25 @@ export default function FormularioTarea({ navigation }) {
           placeholder="Título"
           value={titulo}
           onChangeText={setTitulo}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Descripción"
           value={descripcion}
           onChangeText={setDescripcion}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Fecha de Vencimiento (YYYY-MM-DD)"
           value={fechaVencimiento}
           onChangeText={setFechaVencimiento}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
 
         {/* Combo Box para Prioridad */}
-        <Text style={styles.label}>Prioridad</Text>
+        <Text style={styles.label}>Prioridad:</Text>
         <Picker
           value={prioridad}
           placeholder="Selecciona la prioridad"
@@ -83,7 +84,7 @@ export default function FormularioTarea({ navigation }) {
         </Picker>
 
         {/* Combo Box para Estado */}
-        <Text style={styles.label}>Estado</Text>
+        <Text style={styles.label}>Estado:</Text>
         <Picker
           value={estado}
           placeholder="Selecciona el estado"
