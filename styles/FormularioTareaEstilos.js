@@ -38,13 +38,12 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '100%',
-    borderBottomWidth: 1,
-    borderColor: '#96a7e7', // Color azul suave para el borde del input
+    borderColor: '#96a7e7',
     marginBottom: 10,
     padding: 10,
     fontSize: 16,
     color: colors.titleColor,
-    backgroundColor: '#e2d5ed', // Fondo azul suave para el input
+    backgroundColor: '#e2d5ed',
     borderRadius: 5,
   },
   fab: {

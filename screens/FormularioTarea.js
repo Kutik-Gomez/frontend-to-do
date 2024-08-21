@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import { Picker } from '@react-native-picker/picker';  // Importamos Picker
+import { Picker } from "react-native-ui-lib"; // Importar Picker
 import styles from "../styles/FormularioTareaEstilos"; // Asegúrate de que la ruta sea correcta
 import { FontAwesome } from '@expo/vector-icons';
 import { crearTarea } from "../services/tareasService"; // Importar la función para crear tareas
@@ -10,8 +10,9 @@ export default function FormularioTarea({ navigation }) {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [fechaVencimiento, setFechaVencimiento] = useState("");
-  const [prioridad, setPrioridad] = useState("media"); // Valor predeterminado
-  const [estado, setEstado] = useState("pendiente"); // Valor predeterminado
+  
+  const [prioridad, setPrioridad] = useState("media");
+  const [estado, setEstado] = useState("pendiente");
 
   const handleCrearTarea = async () => {
     try {
@@ -50,7 +51,7 @@ export default function FormularioTarea({ navigation }) {
           placeholder="Título"
           value={titulo}
           onChangeText={setTitulo}
-          placeholderTextColor="#96a7e7" // Color del texto del placeholder
+          placeholderTextColor="#96a7e7"
         />
         <TextInput
           style={styles.input}
@@ -67,24 +68,28 @@ export default function FormularioTarea({ navigation }) {
           placeholderTextColor="#96a7e7"
         />
 
-        {/* Picker para Prioridad */}
+        {/* Combo Box para Prioridad */}
         <Text style={styles.label}>Prioridad</Text>
         <Picker
-          selectedValue={prioridad}
+          value={prioridad}
+          placeholder="Selecciona la prioridad"
+          onChange={(item) => setPrioridad(item)}
           style={styles.input}
-          onValueChange={(itemValue) => setPrioridad(itemValue)}
+          topBarProps={{ title: 'Selecciona la prioridad' }}
         >
           <Picker.Item label="Baja" value="baja" />
           <Picker.Item label="Media" value="media" />
           <Picker.Item label="Alta" value="alta" />
         </Picker>
 
-        {/* Picker para Estado */}
+        {/* Combo Box para Estado */}
         <Text style={styles.label}>Estado</Text>
         <Picker
-          selectedValue={estado}
+          value={estado}
+          placeholder="Selecciona el estado"
+          onChange={(item) => setEstado(item)}
           style={styles.input}
-          onValueChange={(itemValue) => setEstado(itemValue)}
+          topBarProps={{ title: 'Selecciona el estado' }}
         >
           <Picker.Item label="Pendiente" value="pendiente" />
           <Picker.Item label="Completada" value="completada" />
