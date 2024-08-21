@@ -104,9 +104,10 @@ function MyTab() {
   );
 }
 
+// Modificación aquí: Envuelve todo dentro de un `NavigationContainer`
 export default function Navigation() {
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}> {/* Añadido `independent={true}` para evitar conflictos */}
       <MyTab />
     </NavigationContainer>
   );
