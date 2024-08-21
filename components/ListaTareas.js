@@ -125,8 +125,12 @@ export default function ListaTareas() {
           <View style={modalStyles.centeredView}>
             <View style={modalStyles.modalView}>
               <Text style={modalStyles.modalTitle}>{selectedTarea.titulo}</Text>
-              <Text>{selectedTarea.descripcion}</Text>
+              <Text>Descripción: {selectedTarea.descripcion}</Text>
               <Text>Prioridad: {selectedTarea.prioridad}</Text>
+              <Text>Estado: {selectedTarea.estado}</Text>
+              <Text>Fecha de Creación: {new Date(selectedTarea.fecha_creacion).toLocaleDateString()}</Text>
+              <Text>Fecha de Vencimiento: {selectedTarea.fecha_vencimiento ? new Date(selectedTarea.fecha_vencimiento).toLocaleDateString() : 'No definida'}</Text>
+              <Text>ID Usuario: {selectedTarea.usuario_id}</Text>
               <TouchableOpacity
                 style={modalStyles.button}
                 onPress={() => setModalVisible(false)}
