@@ -1,53 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
-import styles from '../styles/ListaEstilos'; // Importa los estilos
+import styles from '../styles/ListaEstilos';
+import { obtenerTareas, actualizarTarea, eliminarTarea } from '../services/tareasService';
 
 export default function ListaTareas() {
-  const [tareas, setTareas] = useState([
-    {
-      id: 1,
-      titulo: "Tarea 1",
-      descripcion: "Detalle de la tarea 1",
-      estado: "pendiente",
-      fecha_vencimiento: null,
-      fecha_creacion: "2024-08-20T00:02:30.697Z",
-      prioridad: "media",
-      usuario_id: "Zdyytjwg0hvebyBK1tnb",
-      completada: false,
-    },
-    {
-      id: 2,
-      titulo: "Tarea 2",
-      descripcion: "Detalle de la tarea 2",
-      estado: "pendiente",
-      fecha_vencimiento: null,
-      fecha_creacion: "2024-08-20T00:02:30.697Z",
-      prioridad: "alta",
-      usuario_id: "Zdyytjwg0hvebyBK1tnb",
-      completada: false,
-    },
-    {
-      id: 3,
-      titulo: "Tarea 3",
-      descripcion: "Detalle de la tarea 3",
-      estado: "pendiente",
-      fecha_vencimiento: null,
-      fecha_creacion: "2024-08-20T00:02:30.697Z",
-      prioridad: "baja",
-      usuario_id: "Zdyytjwg0hvebyBK1tnb",
-      completada: false,
-    },
-  ]);
-
+  const [tareas, setTareas] = useState([]);
   const [selectedTarea, setSelectedTarea] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editableTarea, setEditableTarea] = useState({});
 
+  // Cargar las tareas al inicio
+  useEffect(() => {
+    const cargarTareas = async () => {
+      try {
+        const tareasObtenidas = await obtenerTareas();
+        setTareas(tareasObtenidas);
+      } catch (error) {
+        console.error("Error al cargar las tareas:", error);
+      }
+    };
+
+    cargarTareas();
+  }, []);
+
   // Función para eliminar una tarea
-  const eliminarTarea = (id) => {
-    setTareas(prevTareas => prevTareas.filter(tarea => tarea.id !== id));
+  const handleEliminarTarea = async (id) => {
+    try {
+      await eliminarTarea(id);
+      setTareas(prevTareas => prevTareas.filter(tarea => tarea.id !== id));
+    } catch (error) {
+      console.error("Error al eliminar la tarea:", error);
+    }
   };
 
   // Función para manejar el clic en el checkbox y mostrar el visto antes de eliminar
@@ -59,7 +44,7 @@ export default function ListaTareas() {
     );
 
     setTimeout(() => {
-      eliminarTarea(tarea.id);
+      handleEliminarTarea(tarea.id);
     }, 500); // Espera 500ms antes de eliminar la tarea para que se vea el visto
   };
 
@@ -76,11 +61,16 @@ export default function ListaTareas() {
   };
 
   // Función para actualizar la tarea
-  const actualizarTarea = () => {
-    setTareas(prevTareas => prevTareas.map(tarea =>
-      tarea.id === editableTarea.id ? editableTarea : tarea
-    ));
-    setEditModalVisible(false);
+  const handleActualizarTarea = async () => {
+    try {
+      await actualizarTarea(editableTarea.id, editableTarea);
+      setTareas(prevTareas => prevTareas.map(tarea =>
+        tarea.id === editableTarea.id ? editableTarea : tarea
+      ));
+      setEditModalVisible(false);
+    } catch (error) {
+      console.error("Error al actualizar la tarea:", error);
+    }
   };
 
   // Función para obtener el color según la prioridad
@@ -169,7 +159,7 @@ export default function ListaTareas() {
             />
             <TouchableOpacity
               style={modalStyles.button}
-              onPress={actualizarTarea}
+              onPress={handleActualizarTarea}
             >
               <Text style={modalStyles.buttonText}>Actualizar</Text>
             </TouchableOpacity>
