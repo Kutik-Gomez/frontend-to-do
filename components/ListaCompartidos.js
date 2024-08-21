@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
-import styles from '../styles/ListaEstilos'; // Asegúrate de que este archivo esté correctamente configurado
+import styles from '../styles/CompartidosEstilos';
 import { obtenerCompartidos, actualizarCompartido, eliminarCompartido } from '../services/CompartidosServices';
 
 export default function ListaCompartidos() {
@@ -23,7 +23,7 @@ export default function ListaCompartidos() {
 
   useFocusEffect(
     React.useCallback(() => {
-      cargarCompartidos(); // Carga las tareas compartidas cada vez que la pantalla obtiene el foco
+      cargarCompartidos();
     }, [])
   );
 
@@ -38,8 +38,8 @@ export default function ListaCompartidos() {
 
   const toggleCompletion = (compartido) => {
     setCompartidos(prevCompartidos =>
-      prevCompartidos.map(c =>
-        c.id === compartido.id ? { ...c, completada: !c.completada } : c
+      prevCompartidos.map(t =>
+        t.id === compartido.id ? { ...t, completada: !t.completada } : t
       )
     );
 
@@ -61,8 +61,8 @@ export default function ListaCompartidos() {
   const handleActualizarCompartido = async () => {
     try {
       await actualizarCompartido(editableCompartido.id, editableCompartido);
-      setCompartidos(prevCompartidos => prevCompartidos.map(compartido =>
-        compartido.id === editableCompartido.id ? editableCompartido : compartido
+      setCompartidos(prevCompartidos => prevCompartidos.map(tarea =>
+        tarea.id === editableCompartido.id ? editableCompartido : tarea
       ));
       setEditModalVisible(false);
     } catch (error) {
@@ -126,8 +126,6 @@ export default function ListaCompartidos() {
               <Text>Estado: {selectedCompartido.estado}</Text>
               <Text>Fecha de Creación: {selectedCompartido.fecha_creacion}</Text>
               <Text>Fecha de Vencimiento: {selectedCompartido.fecha_vencimiento || 'No definida'}</Text>
-              <Text>Compartida por: {selectedCompartido.compartida_por}</Text>
-              <Text>Compartida con: {selectedCompartido.compartida_con.join(', ')}</Text>
               
               <TouchableOpacity
                 style={modalStyles.button}
@@ -175,13 +173,6 @@ export default function ListaCompartidos() {
               placeholder="YYYY-MM-DD"
               value={editableCompartido.fecha_vencimiento || ''}
               onChangeText={(text) => setEditableCompartido({ ...editableCompartido, fecha_vencimiento: text })}
-            />
-            <TextInput
-              style={modalStyles.input}
-              value={editableCompartido.compartida_con.join(', ')}
-              onChangeText={(text) =>
-                setEditableCompartido({ ...editableCompartido, compartida_con: text.split(',').map(email => email.trim()) })
-              }
             />
             <TouchableOpacity
               style={modalStyles.button}

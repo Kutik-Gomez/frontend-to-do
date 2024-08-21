@@ -10,7 +10,7 @@ export const obtenerCompartidos = async () => {
       "Content-Type": "application/json",
     },
   });
-
+  
   if (!response.ok) {
     throw new Error("Error al obtener la lista de tareas compartidas.");
   }
@@ -19,7 +19,7 @@ export const obtenerCompartidos = async () => {
 };
 
 // Crear una nueva tarea compartida
-export const crearCompartido = async (tareaCompartida) => {
+export const crearCompartido = async (compartido) => {
   const token = await getToken();
   const response = await fetch("http://localhost:3535/api/compartidos/crear", {
     method: "POST",
@@ -27,9 +27,9 @@ export const crearCompartido = async (tareaCompartida) => {
       "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(tareaCompartida),
+    body: JSON.stringify(compartido),
   });
-
+  
   if (!response.ok) {
     throw new Error("Error al crear la tarea compartida.");
   }
@@ -38,7 +38,7 @@ export const crearCompartido = async (tareaCompartida) => {
 };
 
 // Actualizar una tarea compartida existente
-export const actualizarCompartido = async (id, tareaCompartidaActualizada) => {
+export const actualizarCompartido = async (id, compartidoActualizado) => {
   const token = await getToken();
   const response = await fetch(`http://localhost:3535/api/compartidos/actualizar/${id}`, {
     method: "PUT",
@@ -46,9 +46,9 @@ export const actualizarCompartido = async (id, tareaCompartidaActualizada) => {
       "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(tareaCompartidaActualizada),
+    body: JSON.stringify(compartidoActualizado),
   });
-
+  
   if (!response.ok) {
     throw new Error("Error al actualizar la tarea compartida.");
   }
