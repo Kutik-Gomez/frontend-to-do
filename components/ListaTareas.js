@@ -73,11 +73,11 @@ export default function ListaTareas() {
   const getCheckboxColor = (prioridad) => {
     switch (prioridad) {
       case "alta":
-        return "#ff4d4d";
+        return "#ff0f57";
       case "media":
-        return "#ffa500";
+        return "#ff771b";
       case "baja":
-        return "#32cd32";
+        return "#73d432";
       default:
         return "#ccc";
     }
@@ -102,10 +102,10 @@ export default function ListaTareas() {
             <Text style={styles.description}>{tarea.descripcion}</Text>
           </View>
           <TouchableOpacity style={styles.iconContainer} onPress={() => mostrarDetalles(tarea)}>
-            <FontAwesome name="eye" size={20} color="#000" />
+            <FontAwesome name="eye" size={30} color="#002cb5" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconContainer} onPress={() => mostrarEdicion(tarea)}>
-            <FontAwesome name="pencil" size={20} color="#000" />
+            <FontAwesome name="pencil" size={30} color="#002cb5" />
           </TouchableOpacity>
         </View>
       ))}
