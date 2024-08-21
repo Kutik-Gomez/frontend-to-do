@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Para almacenar el token
-import styles from "../styles/LoginStyles"; // Importa los estilos
-import colors from "../styles/colors"; // Importa los colores globales
-import { FontAwesome } from "@expo/vector-icons"; // Para el ícono de login
-import { loginUsuario } from "../services/authService"; // Importa la función de login
+import styles from "../styles/LoginStyles"; 
+import colors from "../styles/colors"; 
+import { FontAwesome } from "@expo/vector-icons"; 
+import { loginUsuario } from "../services/authService"; 
 
 export default function LoginPagina({ navigation }) {
   const [correo, setCorreo] = useState("");
@@ -13,10 +12,9 @@ export default function LoginPagina({ navigation }) {
 
   const handleLogin = async () => {
     setLoading(true);
-    const { token, success, error } = await loginUsuario(correo, clave);
+    const { success, error } = await loginUsuario(correo, clave);
 
     if (success) {
-      await AsyncStorage.setItem("token", token); // Almacena el token en AsyncStorage
       navigation.replace("Navegacion"); // Redirige a la pantalla principal
     } else {
       Alert.alert("Error de Autenticación", error);
