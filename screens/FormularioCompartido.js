@@ -42,7 +42,7 @@ export default function FormularioCompartido({ navigation }) {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-          <FontAwesome name="arrow-left" size={24} color={styles.titleColor} />
+          <FontAwesome name="arrow-left" size={30} color={"#ffef6a"} />
         </TouchableOpacity>
         <Text style={styles.title}>Formulario Compartido</Text>
       </View>
@@ -52,42 +52,42 @@ export default function FormularioCompartido({ navigation }) {
           placeholder="Título"
           value={titulo}
           onChangeText={setTitulo}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Descripción"
           value={descripcion}
           onChangeText={setDescripcion}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Fecha de Vencimiento (YYYY-MM-DD)"
           value={fechaVencimiento}
           onChangeText={setFechaVencimiento}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Prioridad (baja, media, alta)"
           value={prioridad}
           onChangeText={setPrioridad}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Estado (pendiente, completada)"
           value={estado}
           onChangeText={setEstado}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
         <TextInput
           style={styles.input}
           placeholder="Correos de Colaboradores (separados por comas)"
           value={correosColaboradores}
           onChangeText={setCorreosColaboradores}
-          placeholderTextColor="#96a7e7"
+          placeholderTextColor="#4f3975"
         />
       </View>
       <TouchableOpacity style={styles.fab} onPress={handleCrearCompartido}>
