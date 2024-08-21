@@ -2,15 +2,16 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../styles/colors"; // Importa los colores globales
 import { FontAwesome } from '@expo/vector-icons'; // Asegúrate de tener instalada la librería
+import ListaCompartidos from "../components/ListaCompartidos"; // Importa la lista de tareas compartidas
 
-export default function ColaboradoresPagina({ navigation }) { // Añade navigation como prop
+export default function ColaboradoresPagina({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Compartidos Tarea</Text>
       </View>
       <View style={styles.content}>
-        {/* Aquí puedes agregar el contenido de la página */}
+        <ListaCompartidos /> {/* Aquí se muestra la lista de tareas compartidas */}
       </View>
       <TouchableOpacity 
         style={styles.fab} 

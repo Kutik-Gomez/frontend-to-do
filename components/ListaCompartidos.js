@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Modal, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useFocusEffect } from '@react-navigation/native';
 import styles from '../styles/CompartidosEstilos';
@@ -17,7 +17,7 @@ export default function ListaCompartidos() {
       const compartidosObtenidos = await obtenerCompartidos();
       setCompartidos(compartidosObtenidos);
     } catch (error) {
-      console.error("Error al cargar las tareas compartidas:", error);
+      console.error("Error al cargar los compartidos:", error);
     }
   };
 
@@ -61,8 +61,8 @@ export default function ListaCompartidos() {
   const handleActualizarCompartido = async () => {
     try {
       await actualizarCompartido(editableCompartido.id, editableCompartido);
-      setCompartidos(prevCompartidos => prevCompartidos.map(tarea =>
-        tarea.id === editableCompartido.id ? editableCompartido : tarea
+      setCompartidos(prevCompartidos => prevCompartidos.map(compartido =>
+        compartido.id === editableCompartido.id ? editableCompartido : compartido
       ));
       setEditModalVisible(false);
     } catch (error) {
