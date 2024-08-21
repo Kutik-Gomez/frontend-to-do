@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.contentBackground,
     padding: 16,
   },
+  label: {
+    fontSize: 16,
+    color: colors.titleColor,
+    marginBottom: 8,
+  },
   input: {
     width: '100%',
     borderBottomWidth: 1,

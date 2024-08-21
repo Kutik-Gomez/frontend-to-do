@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import { Picker } from '@react-native-picker/picker';  // Importamos Picker
 import styles from "../styles/FormularioTareaEstilos"; // Asegúrate de que la ruta sea correcta
 import { FontAwesome } from '@expo/vector-icons';
 import { crearTarea } from "../services/tareasService"; // Importar la función para crear tareas
@@ -9,8 +10,8 @@ export default function FormularioTarea({ navigation }) {
   const [titulo, setTitulo] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [fechaVencimiento, setFechaVencimiento] = useState("");
-  const [prioridad, setPrioridad] = useState("media");
-  const [estado, setEstado] = useState("pendiente");
+  const [prioridad, setPrioridad] = useState("media"); // Valor predeterminado
+  const [estado, setEstado] = useState("pendiente"); // Valor predeterminado
 
   const handleCrearTarea = async () => {
     try {
@@ -65,20 +66,29 @@ export default function FormularioTarea({ navigation }) {
           onChangeText={setFechaVencimiento}
           placeholderTextColor="#96a7e7"
         />
-        <TextInput
+
+        {/* Picker para Prioridad */}
+        <Text style={styles.label}>Prioridad</Text>
+        <Picker
+          selectedValue={prioridad}
           style={styles.input}
-          placeholder="Prioridad (baja, media, alta)"
-          value={prioridad}
-          onChangeText={setPrioridad}
-          placeholderTextColor="#96a7e7"
-        />
-        <TextInput
+          onValueChange={(itemValue) => setPrioridad(itemValue)}
+        >
+          <Picker.Item label="Baja" value="baja" />
+          <Picker.Item label="Media" value="media" />
+          <Picker.Item label="Alta" value="alta" />
+        </Picker>
+
+        {/* Picker para Estado */}
+        <Text style={styles.label}>Estado</Text>
+        <Picker
+          selectedValue={estado}
           style={styles.input}
-          placeholder="Estado (pendiente, completada)"
-          value={estado}
-          onChangeText={setEstado}
-          placeholderTextColor="#96a7e7"
-        />
+          onValueChange={(itemValue) => setEstado(itemValue)}
+        >
+          <Picker.Item label="Pendiente" value="pendiente" />
+          <Picker.Item label="Completada" value="completada" />
+        </Picker>
       </View>
       <TouchableOpacity style={styles.fab} onPress={handleCrearTarea}>
         <Text style={styles.fabText}>Enviar</Text>

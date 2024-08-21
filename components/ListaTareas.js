@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
+import { useFocusEffect } from '@react-navigation/native';  // Importa useFocusEffect
 import styles from '../styles/ListaEstilos';
 import { obtenerTareas, actualizarTarea, eliminarTarea } from '../services/tareasService';
 
@@ -11,18 +12,20 @@ export default function ListaTareas() {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editableTarea, setEditableTarea] = useState({});
 
-  useEffect(() => {
-    const cargarTareas = async () => {
-      try {
-        const tareasObtenidas = await obtenerTareas();
-        setTareas(tareasObtenidas);
-      } catch (error) {
-        console.error("Error al cargar las tareas:", error);
-      }
-    };
+  const cargarTareas = async () => {
+    try {
+      const tareasObtenidas = await obtenerTareas();
+      setTareas(tareasObtenidas);
+    } catch (error) {
+      console.error("Error al cargar las tareas:", error);
+    }
+  };
 
-    cargarTareas();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      cargarTareas(); // Carga las tareas cada vez que la pantalla obtiene el foco
+    }, [])
+  );
 
   const handleEliminarTarea = async (id) => {
     try {
