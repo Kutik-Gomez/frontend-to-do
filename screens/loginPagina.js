@@ -1,17 +1,27 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Para almacenar el token
 import styles from "../styles/LoginStyles"; // Importa los estilos
 import colors from "../styles/colors"; // Importa los colores globales
 import { FontAwesome } from "@expo/vector-icons"; // Para el ícono de login
+import { loginUsuario } from "../services/authService"; // Importa la función de login
 
 export default function LoginPagina({ navigation }) {
   const [correo, setCorreo] = useState("");
   const [clave, setClave] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    // Aquí puedes agregar la lógica de autenticación
-    console.log("Correo:", correo);
-    console.log("Clave:", clave);
+  const handleLogin = async () => {
+    setLoading(true);
+    const { token, success, error } = await loginUsuario(correo, clave);
+
+    if (success) {
+      await AsyncStorage.setItem("token", token); // Almacena el token en AsyncStorage
+      navigation.replace("Home"); // Navega a la pantalla principal
+    } else {
+      Alert.alert("Error de Autenticación", error);
+    }
+    setLoading(false);
   };
 
   return (
@@ -35,8 +45,10 @@ export default function LoginPagina({ navigation }) {
         onChangeText={setClave}
         secureTextEntry
       />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Ingresar</Text>
+      <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={loading}>
+        <Text style={styles.buttonText}>
+          {loading ? "Ingresando..." : "Ingresar"}
+        </Text>
       </TouchableOpacity>
     </View>
   );
