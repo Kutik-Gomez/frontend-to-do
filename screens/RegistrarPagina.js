@@ -13,7 +13,7 @@ export default function RegistrarPagina({ navigation }) {
 
   const handleRegistrar = async () => {
     // Verifica que todos los campos estén completos
-    if (!nombre || !correo || !clave) {
+    if (!nombre, !correo, !clave) {
       alert("Por favor, completa todos los campos.");
       return;
     }
@@ -53,6 +53,10 @@ export default function RegistrarPagina({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate("Login")}>
+        <FontAwesome name="arrow-left" size={24} color={colors.color1} />
+      </TouchableOpacity>
+      
       <FontAwesome name="user-plus" size={100} color={colors.color1} style={styles.icon} />
       <Text style={styles.title}>Registrar Usuario</Text>
       <TextInput

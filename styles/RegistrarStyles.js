@@ -9,6 +9,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.containerBackground,
     padding: 20,
   },
+  backButton: {
+    position: 'absolute',
+    top: 40, // ajusta según sea necesario
+    left: 16, // ajusta según sea necesario
+    zIndex: 1,
+  },
   icon: {
     marginBottom: 20,
   },
