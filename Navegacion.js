@@ -60,8 +60,8 @@ function MyTab() {
     <Tab.Navigator
       initialRouteName="Tareas"
       screenOptions={{
-        tabBarActiveTintColor: "#4d409e", 
-        tabBarInactiveTintColor: "#796fb6", 
+        tabBarActiveTintColor: "#0c0787", 
+        tabBarInactiveTintColor: "#065ad3", 
         tabBarLabelStyle: {
           fontSize: 15, 
         },
