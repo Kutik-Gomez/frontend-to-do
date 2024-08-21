@@ -11,7 +11,6 @@ export default function ListaTareas() {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [editableTarea, setEditableTarea] = useState({});
 
-  // Cargar las tareas al inicio
   useEffect(() => {
     const cargarTareas = async () => {
       try {
@@ -25,7 +24,6 @@ export default function ListaTareas() {
     cargarTareas();
   }, []);
 
-  // Función para eliminar una tarea
   const handleEliminarTarea = async (id) => {
     try {
       await eliminarTarea(id);
@@ -35,7 +33,6 @@ export default function ListaTareas() {
     }
   };
 
-  // Función para manejar el clic en el checkbox y mostrar el visto antes de eliminar
   const toggleCompletion = (tarea) => {
     setTareas(prevTareas =>
       prevTareas.map(t =>
@@ -45,22 +42,19 @@ export default function ListaTareas() {
 
     setTimeout(() => {
       handleEliminarTarea(tarea.id);
-    }, 500); // Espera 500ms antes de eliminar la tarea para que se vea el visto
+    }, 500);
   };
 
-  // Función para mostrar los detalles de una tarea
   const mostrarDetalles = (tarea) => {
     setSelectedTarea(tarea);
     setModalVisible(true);
   };
 
-  // Función para mostrar el modal de edición de una tarea
   const mostrarEdicion = (tarea) => {
     setEditableTarea(tarea);
     setEditModalVisible(true);
   };
 
-  // Función para actualizar la tarea
   const handleActualizarTarea = async () => {
     try {
       await actualizarTarea(editableTarea.id, editableTarea);
@@ -73,17 +67,16 @@ export default function ListaTareas() {
     }
   };
 
-  // Función para obtener el color según la prioridad
   const getCheckboxColor = (prioridad) => {
     switch (prioridad) {
       case "alta":
-        return "#ff4d4d"; // Rojo
+        return "#ff4d4d";
       case "media":
-        return "#ffa500"; // Naranja
+        return "#ffa500";
       case "baja":
-        return "#32cd32"; // Verde
+        return "#32cd32";
       default:
-        return "#ccc"; // Color por defecto (gris)
+        return "#ccc";
     }
   };
 
@@ -94,7 +87,7 @@ export default function ListaTareas() {
           <View style={styles.checkboxContainer}>
             <TouchableOpacity
               style={[styles.checkbox, { backgroundColor: getCheckboxColor(tarea.prioridad) }]}
-              onPress={() => toggleCompletion(tarea)} // Muestra el visto antes de eliminar
+              onPress={() => toggleCompletion(tarea)}
             >
               {tarea.completada && (
                 <FontAwesome name="check" size={16} color="white" />
@@ -128,9 +121,9 @@ export default function ListaTareas() {
               <Text>Descripción: {selectedTarea.descripcion}</Text>
               <Text>Prioridad: {selectedTarea.prioridad}</Text>
               <Text>Estado: {selectedTarea.estado}</Text>
-              <Text>Fecha de Creación: {new Date(selectedTarea.fecha_creacion).toLocaleDateString()}</Text>
-              <Text>Fecha de Vencimiento: {selectedTarea.fecha_vencimiento ? new Date(selectedTarea.fecha_vencimiento).toLocaleDateString() : 'No definida'}</Text>
-              <Text>ID Usuario: {selectedTarea.usuario_id}</Text>
+              <Text>Fecha de Creación: {selectedTarea.fecha_creacion}</Text>
+              <Text>Fecha de Vencimiento: {selectedTarea.fecha_vencimiento || 'No definida'}</Text>
+              
               <TouchableOpacity
                 style={modalStyles.button}
                 onPress={() => setModalVisible(false)}
@@ -160,6 +153,23 @@ export default function ListaTareas() {
               style={modalStyles.input}
               value={editableTarea.descripcion}
               onChangeText={(text) => setEditableTarea({ ...editableTarea, descripcion: text })}
+            />
+            <TextInput
+              style={modalStyles.input}
+              value={editableTarea.estado}
+              onChangeText={(text) => setEditableTarea({ ...editableTarea, estado: text })}
+            />
+            <TextInput
+              style={modalStyles.input}
+              placeholder="YYYY-MM-DD"
+              value={editableTarea.fecha_creacion || ''}
+              onChangeText={(text) => setEditableTarea({ ...editableTarea, fecha_creacion: text })}
+            />
+            <TextInput
+              style={modalStyles.input}
+              placeholder="YYYY-MM-DD"
+              value={editableTarea.fecha_vencimiento || ''}
+              onChangeText={(text) => setEditableTarea({ ...editableTarea, fecha_vencimiento: text })}
             />
             <TouchableOpacity
               style={modalStyles.button}
