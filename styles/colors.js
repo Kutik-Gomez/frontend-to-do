@@ -1,8 +1,8 @@
 const colors = {
     containerBackground: '#e8e8e8',
-    headerBackground: '#7a71a9',
+    headerBackground: '#065ad3',
     headerBorderBottom: '#dcdcdc',
-    titleColor: '#f4f2f9',
+    titleColor: '#ffff',
     contentBackground: '#fffbff',
   };
   

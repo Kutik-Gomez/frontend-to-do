@@ -17,7 +17,7 @@ export default function TareasPagina({ navigation }) {
         style={styles.fab} 
         onPress={() => navigation.navigate("FormularioTarea")} 
       >
-        <FontAwesome name="plus" size={24} color="white" />
+        <FontAwesome name="plus" size={24} color="#ffff" />
       </TouchableOpacity>
     </View>
   );
@@ -33,16 +33,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: colors.headerBorderBottom,
+    borderBottomColor: "#00fdff",
   },
   title: {
-    fontSize: 28,
+    fontSize: 35,
     fontWeight: 'bold',
     color: colors.titleColor,
   },
   content: {
     flex: 1,
-    backgroundColor: colors.contentBackground,
+    backgroundColor: "#a9cdf9",
     padding: 16,
   },
   fab: {
@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     right: 16,
     bottom: 16,
-    backgroundColor: '#007bff',
+    backgroundColor: '#e44215',
     borderRadius: 28,
     elevation: 5,
-    shadowColor: '#000',
+    shadowColor: '#0c0787',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
