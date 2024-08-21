@@ -14,36 +14,38 @@ const styles = StyleSheet.create({
     top: 40, // ajusta según sea necesario
     left: 16, // ajusta según sea necesario
     zIndex: 1,
+    
   },
   icon: {
     marginBottom: 20,
+    color: "#0c0787",
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: colors.color1,
+    color: "#0c0787",
     marginBottom: 20,
   },
   input: {
     width: "100%",
     height: 50,
-    borderColor: colors.color1,
+    borderColor: "#0c0787",
     borderWidth: 1,
     borderRadius: 10,
     paddingHorizontal: 10,
     marginBottom: 15,
-    color: colors.color1,
+    color: "#065ad3",
   },
   button: {
     width: "100%",
     height: 50,
-    backgroundColor: colors.color1,
+    backgroundColor: "#0c0787",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
   },
   buttonText: {
-    color: colors.color5,
+    color: "#fffffe",
     fontSize: 18,
     fontWeight: "bold",
   },
@@ -67,14 +69,14 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalButton: {
-    backgroundColor: colors.color1,
+    backgroundColor: "#065ad3",
     padding: 10,
     borderRadius: 10,
     width: "100%",
     alignItems: "center",
   },
   modalButtonText: {
-    color: colors.color5,
+    color: "#fffffe",
     fontSize: 16,
     fontWeight: "bold",
   },

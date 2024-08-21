@@ -51,7 +51,7 @@ export default function LoginPagina({ navigation }) {
       
       {/* Enlace para registrar */}
       <TouchableOpacity onPress={() => navigation.navigate("Registrar")}>
-        <Text style={styles.registerText}>¿No tienes cuenta? Regístrate</Text>
+      <Text style={[styles.registerText, { fontSize: 17 }]}>¿No tienes cuenta? Regístrate</Text>
       </TouchableOpacity>
     </View>
   );

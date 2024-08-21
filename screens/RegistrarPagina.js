@@ -54,7 +54,7 @@ export default function RegistrarPagina({ navigation }) {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate("Login")}>
-        <FontAwesome name="arrow-left" size={24} color={colors.color1} />
+        <FontAwesome name="arrow-left" size={24} color={"#065ad3"} />
       </TouchableOpacity>
       
       <FontAwesome name="user-plus" size={100} color={colors.color1} style={styles.icon} />
@@ -97,7 +97,7 @@ export default function RegistrarPagina({ navigation }) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Usuario creado exitosamente.</Text>
+            <Text style={styles.modalText}>Usuario creado exitosamente!</Text>
             <TouchableOpacity style={styles.modalButton} onPress={handleCloseModal}>
               <Text style={styles.modalButtonText}>Aceptar</Text>
             </TouchableOpacity>
