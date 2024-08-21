@@ -79,7 +79,7 @@ export default function ListaTareas() {
       case "baja":
         return "#73d432";
       default:
-        return "#ccc";
+        return "#fff";
     }
   };
 

@@ -17,7 +17,7 @@ export default function ColaboradoresPagina({ navigation }) {
         style={styles.fab} 
         onPress={() => navigation.navigate("FormularioCompartido")} // Navega a FormularioCompartido
       >
-        <FontAwesome name="plus" size={24} color="white" />
+        <FontAwesome name="plus" size={24} color="#ffd230" />
       </TouchableOpacity>
     </View>
   );
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: colors.headerBorderBottom, // Usa el color global para la línea inferior del encabezado
+    borderBottomColor: "#ffe85c", // Usa el color global para la línea inferior del encabezado
   },
   title: {
     fontSize: 28,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    backgroundColor: colors.contentBackground, // Usa el color global para el fondo del contenido
+    backgroundColor: "#a9cdf9", // Usa el color global para el fondo del contenido
     padding: 16,
   },
   fab: {
@@ -53,10 +53,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     right: 16,
     bottom: 16,
-    backgroundColor: '#007bff', // Color azul para el botón flotante, puedes usar un color de tu paleta
+    backgroundColor: '#004d60', // Color azul para el botón flotante, puedes usar un color de tu paleta
     borderRadius: 28,
     elevation: 5, // Sombra en Android
-    shadowColor: '#000', // Sombra en iOS
+    shadowColor: '#d2daf7', // Sombra en iOS
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,

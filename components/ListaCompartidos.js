@@ -73,13 +73,13 @@ export default function ListaCompartidos() {
   const getCheckboxColor = (prioridad) => {
     switch (prioridad) {
       case "alta":
-        return "#ff4d4d";
+        return "#ff0f57";
       case "media":
-        return "#ffa500";
+        return "#ff771b";
       case "baja":
-        return "#32cd32";
+        return "#73d432";
       default:
-        return "#ccc";
+        return "#fff";
     }
   };
 
@@ -98,14 +98,14 @@ export default function ListaCompartidos() {
             </TouchableOpacity>
           </View>
           <View style={styles.textContainer}>
-            <Text style={styles.title}>{compartido.titulo}</Text>
-            <Text style={styles.description}>{compartido.descripcion}</Text>
+            <Text style={[styles.title, {color:"#fff"}]}>{compartido.titulo}</Text>
+            <Text style={[styles.description, {color:"#fff"}]}>{compartido.descripcion}</Text>
           </View>
           <TouchableOpacity style={styles.iconContainer} onPress={() => mostrarDetalles(compartido)}>
-            <FontAwesome name="eye" size={20} color="#000" />
+            <FontAwesome name="eye" size={30} color="#ffcb1c" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconContainer} onPress={() => mostrarEdicion(compartido)}>
-            <FontAwesome name="pencil" size={20} color="#000" />
+            <FontAwesome name="pencil" size={30} color="#ffcb1c" />
           </TouchableOpacity>
         </View>
       ))}
