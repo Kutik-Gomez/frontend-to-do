@@ -48,6 +48,11 @@ export default function LoginPagina({ navigation }) {
           {loading ? "Ingresando..." : "Ingresar"}
         </Text>
       </TouchableOpacity>
+      
+      {/* Enlace para registrar */}
+      <TouchableOpacity onPress={() => navigation.navigate("Registrar")}>
+        <Text style={styles.registerText}>¿No tienes cuenta? Regístrate</Text>
+      </TouchableOpacity>
     </View>
   );
 }
