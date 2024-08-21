@@ -16,7 +16,7 @@ export default function App() {
           options={{ headerShown: false }} // Oculta el encabezado por defecto
         />
         <Stack.Screen
-          name="Home"
+          name="Navegacion" // Nombre del stack screen que conecta con Navegacion.js
           component={Navegacion}
           options={{ headerShown: false }} // Oculta el encabezado por defecto
         />

@@ -17,7 +17,7 @@ export default function LoginPagina({ navigation }) {
 
     if (success) {
       await AsyncStorage.setItem("token", token); // Almacena el token en AsyncStorage
-      navigation.replace("Home"); // Navega a la pantalla principal
+      navigation.replace("Navegacion"); // Redirige a la pantalla principal
     } else {
       Alert.alert("Error de Autenticación", error);
     }
