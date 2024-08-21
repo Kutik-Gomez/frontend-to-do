@@ -1,9 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Modal, StyleSheet, TextInput } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
-import styles from '../styles/CompartidosEstilos';
-import { obtenerCompartidos, actualizarCompartido, eliminarCompartido } from '../services/CompartidosServices';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  StyleSheet,
+  TextInput,
+} from "react-native";
+import { FontAwesome } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import styles from "../styles/CompartidosEstilos";
+import {
+  obtenerCompartidos,
+  actualizarCompartido,
+  eliminarCompartido,
+} from "../services/CompartidosServices";
 
 export default function ListaCompartidos() {
   const [compartidos, setCompartidos] = useState([]);
@@ -30,15 +41,17 @@ export default function ListaCompartidos() {
   const handleEliminarCompartido = async (id) => {
     try {
       await eliminarCompartido(id);
-      setCompartidos(prevCompartidos => prevCompartidos.filter(compartido => compartido.id !== id));
+      setCompartidos((prevCompartidos) =>
+        prevCompartidos.filter((compartido) => compartido.id !== id)
+      );
     } catch (error) {
       console.error("Error al eliminar la tarea compartida:", error);
     }
   };
 
   const toggleCompletion = (compartido) => {
-    setCompartidos(prevCompartidos =>
-      prevCompartidos.map(t =>
+    setCompartidos((prevCompartidos) =>
+      prevCompartidos.map((t) =>
         t.id === compartido.id ? { ...t, completada: !t.completada } : t
       )
     );
@@ -61,9 +74,13 @@ export default function ListaCompartidos() {
   const handleActualizarCompartido = async () => {
     try {
       await actualizarCompartido(editableCompartido.id, editableCompartido);
-      setCompartidos(prevCompartidos => prevCompartidos.map(compartido =>
-        compartido.id === editableCompartido.id ? editableCompartido : compartido
-      ));
+      setCompartidos((prevCompartidos) =>
+        prevCompartidos.map((compartido) =>
+          compartido.id === editableCompartido.id
+            ? editableCompartido
+            : compartido
+        )
+      );
       setEditModalVisible(false);
     } catch (error) {
       console.error("Error al actualizar la tarea compartida:", error);
@@ -85,11 +102,14 @@ export default function ListaCompartidos() {
 
   return (
     <View>
-      {compartidos.map(compartido => (
+      {compartidos.map((compartido) => (
         <View key={compartido.id} style={styles.itemContainer}>
           <View style={styles.checkboxContainer}>
             <TouchableOpacity
-              style={[styles.checkbox, { backgroundColor: getCheckboxColor(compartido.prioridad) }]}
+              style={[
+                styles.checkbox,
+                { backgroundColor: getCheckboxColor(compartido.prioridad) },
+              ]}
               onPress={() => toggleCompletion(compartido)}
             >
               {compartido.completada && (
@@ -98,13 +118,23 @@ export default function ListaCompartidos() {
             </TouchableOpacity>
           </View>
           <View style={styles.textContainer}>
-            <Text style={[styles.title, {color:"#fff"}]}>{compartido.titulo}</Text>
-            <Text style={[styles.description, {color:"#fff"}]}>{compartido.descripcion}</Text>
+            <Text style={[styles.title, { color: "#fff" }]}>
+              {compartido.titulo}
+            </Text>
+            <Text style={[styles.description, { color: "#fff" }]}>
+              {compartido.descripcion}
+            </Text>
           </View>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => mostrarDetalles(compartido)}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => mostrarDetalles(compartido)}
+          >
             <FontAwesome name="eye" size={30} color="#ffcb1c" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => mostrarEdicion(compartido)}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => mostrarEdicion(compartido)}
+          >
             <FontAwesome name="pencil" size={30} color="#ffcb1c" />
           </TouchableOpacity>
         </View>
@@ -120,13 +150,24 @@ export default function ListaCompartidos() {
         >
           <View style={modalStyles.centeredView}>
             <View style={modalStyles.modalView}>
-              <Text style={modalStyles.modalTitle}>{selectedCompartido.titulo}</Text>
+              <Text style={modalStyles.modalTitle}>
+                {selectedCompartido.titulo}
+              </Text>
               <Text>Descripción: {selectedCompartido.descripcion}</Text>
               <Text>Prioridad: {selectedCompartido.prioridad}</Text>
               <Text>Estado: {selectedCompartido.estado}</Text>
-              <Text>Fecha de Creación: {selectedCompartido.fecha_creacion}</Text>
-              <Text>Fecha de Vencimiento: {selectedCompartido.fecha_vencimiento || 'No definida'}</Text>
-              
+              <Text>
+                Fecha de Creación: {selectedCompartido.fecha_creacion}
+              </Text>
+              <Text>
+                Fecha de Vencimiento:{" "}
+                {selectedCompartido.fecha_vencimiento || "No definida"}
+              </Text>
+              <Text>
+                <Text>Compartida con:</Text>{" "}
+                {selectedCompartido.compartida_con.join(", ")}
+              </Text>
+
               <TouchableOpacity
                 style={modalStyles.button}
                 onPress={() => setModalVisible(false)}
@@ -150,29 +191,48 @@ export default function ListaCompartidos() {
             <TextInput
               style={modalStyles.input}
               value={editableCompartido.titulo}
-              onChangeText={(text) => setEditableCompartido({ ...editableCompartido, titulo: text })}
+              onChangeText={(text) =>
+                setEditableCompartido({ ...editableCompartido, titulo: text })
+              }
             />
             <TextInput
               style={modalStyles.input}
               value={editableCompartido.descripcion}
-              onChangeText={(text) => setEditableCompartido({ ...editableCompartido, descripcion: text })}
+              onChangeText={(text) =>
+                setEditableCompartido({
+                  ...editableCompartido,
+                  descripcion: text,
+                })
+              }
             />
             <TextInput
               style={modalStyles.input}
               value={editableCompartido.estado}
-              onChangeText={(text) => setEditableCompartido({ ...editableCompartido, estado: text })}
+              onChangeText={(text) =>
+                setEditableCompartido({ ...editableCompartido, estado: text })
+              }
             />
             <TextInput
               style={modalStyles.input}
               placeholder="YYYY-MM-DD"
-              value={editableCompartido.fecha_creacion || ''}
-              onChangeText={(text) => setEditableCompartido({ ...editableCompartido, fecha_creacion: text })}
+              value={editableCompartido.fecha_creacion || ""}
+              onChangeText={(text) =>
+                setEditableCompartido({
+                  ...editableCompartido,
+                  fecha_creacion: text,
+                })
+              }
             />
             <TextInput
               style={modalStyles.input}
               placeholder="YYYY-MM-DD"
-              value={editableCompartido.fecha_vencimiento || ''}
-              onChangeText={(text) => setEditableCompartido({ ...editableCompartido, fecha_vencimiento: text })}
+              value={editableCompartido.fecha_vencimiento || ""}
+              onChangeText={(text) =>
+                setEditableCompartido({
+                  ...editableCompartido,
+                  fecha_vencimiento: text,
+                })
+              }
             />
             <TouchableOpacity
               style={modalStyles.button}
@@ -196,17 +256,17 @@ export default function ListaCompartidos() {
 const modalStyles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalView: {
     width: 300,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     borderRadius: 8,
     padding: 20,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
@@ -214,26 +274,26 @@ const modalStyles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   input: {
-    width: '100%',
+    width: "100%",
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     marginBottom: 10,
     padding: 5,
   },
   button: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#2196F3",
     borderRadius: 5,
     padding: 10,
     marginTop: 10,
-    width: '100%',
-    alignItems: 'center',
+    width: "100%",
+    alignItems: "center",
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
 });
