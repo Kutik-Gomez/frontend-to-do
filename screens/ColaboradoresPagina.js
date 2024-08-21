@@ -8,7 +8,7 @@ export default function ColaboradoresPagina({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Compartidos Tarea</Text>
+        <Text style={styles.title}>Compartidos</Text>
       </View>
       <View style={styles.content}>
         <ListaCompartidos /> {/* Aquí se muestra la lista de tareas compartidas */}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#ffe85c", // Usa el color global para la línea inferior del encabezado
   },
   title: {
-    fontSize: 28,
+    fontSize: 35,
     fontWeight: 'bold',
     color: colors.titleColor, // Usa el color global para el texto del título
   },
