@@ -16,7 +16,7 @@ export default function FormularioCompartido({ navigation }) {
   const handleCrearCompartido = async () => {
     try {
       const token = await getToken(); 
-      const usuarioId = "Zdyytjwg0hvebyBK1tnb"; 
+      const usuarioId = "Kskw97b9LlSQOKC16txo"; 
 
       const nuevaCompartido = {
         titulo,
